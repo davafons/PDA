@@ -2,7 +2,7 @@
 #include "state/state.hpp"
 
 TEST(State, initialization) {
-  State q1("q1");
+  pda::State q1("q1");
 
   ASSERT_EQ(q1.name(), "q1");
 }
