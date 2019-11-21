@@ -3,6 +3,7 @@
 #include <stack>
 #include <string>
 
+#include "state/alphabet.hpp"
 #include "state/pda.hpp"
 
 int main() {
@@ -10,10 +11,20 @@ int main() {
 
   pda.addState("q1");
   pda.addState("q2");
-  pda.addState("q1");
 
   pda.addTransition("q1", "a", "Z", "q2", {"A", "Z"});
   pda.addTransition("q2", "a", "Z", "q1", {"A", "Z"});
+
+  pda::Alphabet a;
+  a.addSymbols({"a", "b", "c"});
+
+  std::vector<pda::Symbol> asdf = a.split("abcd");
+
+  std::cout << asdf.size() << std::endl;
+
+  for (const auto &s : asdf) {
+    std::cout << s << std::endl;
+  }
 
   //
   // pda::Tape input_tape("a b c");

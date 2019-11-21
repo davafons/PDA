@@ -5,4 +5,5 @@ target_sources(
   ${CMAKE_CURRENT_LIST_DIR}/state.cpp
   ${CMAKE_CURRENT_LIST_DIR}/transition.cpp
   ${CMAKE_CURRENT_LIST_DIR}/tape.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/alphabet.cpp
 )
