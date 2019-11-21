@@ -11,7 +11,6 @@ endif()
 add_executable(${PROJECT_NAME})
 add_subdirectory(src)
 
-
 include(cmake/googletest.cmake)
 fetch_googletest(
   ${PROJECT_SOURCE_DIR}/cmake

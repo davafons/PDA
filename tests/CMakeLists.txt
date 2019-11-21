@@ -1,8 +1,15 @@
 add_executable(
   pda_tests
-  test_example.cpp
+  state/test_state.cpp
+)
+
+target_sources(
+  pda_tests
+  PRIVATE
+  ${PROJECT_SOURCE_DIR}/src/state/state.cpp
 )
 
 target_link_libraries(pda_tests gtest_main)
+target_include_directories(pda_tests PRIVATE "${PROJECT_SOURCE_DIR}/src")
 
 add_test(TARGET pda_tests)
