@@ -16,6 +16,12 @@ void Stack::setStartSymbol(const Symbol& symbol) {
   push(symbol);
 }
 
+void Stack::pushSymbols(const std::string& symbols_str) {
+  for (const auto& symbol : alphabet_.split(symbols_str)) {
+    push(symbol);
+  }
+}
+
 void Stack::clear() {
   while (!empty()) {
     pop();

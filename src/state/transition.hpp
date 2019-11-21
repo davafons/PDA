@@ -17,7 +17,7 @@ public:
   Transition(const Symbol& input_symbol,
              const Symbol& stack_symbol,
              const State* next_state,
-             const std::vector<Symbol>& new_stack_symbols,
+             const std::string& new_stack_symbols,
              Tape& tape,
              Stack& stack);
 
@@ -29,7 +29,7 @@ public:
 private:
   Symbol input_symbol_;
   Symbol stack_symbol_;
-  std::vector<Symbol> new_stack_symbols_;
+  std::string new_stack_symbols_;
 
   const State* next_state_;
 

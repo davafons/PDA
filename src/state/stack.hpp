@@ -16,6 +16,8 @@ public:
 
   void setStartSymbol(const Symbol& symbol);
 
+  void pushSymbols(const std::string& symbols);
+
   void clear();
 
 private:

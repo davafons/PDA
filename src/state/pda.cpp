@@ -45,6 +45,19 @@ void Pda::setStackStartSymbol(const Symbol& symbol) {
   stack_.setStartSymbol(symbol);
 }
 
+void Pda::setFinalSymbols(const std::string& names) {
+  for (const auto& name : splitSymbols(names)) {
+    auto* s = state(name);
+    if (s) {
+      s->setFinal(true);
+    }
+  }
+}
+
+State* Pda::state(const std::string& name) {
+  return const_cast<State*>(const_cast<const Pda*>(this)->state(name));
+}
+
 const State* Pda::state(const std::string& name) const {
   try {
     return states_.at(name);
@@ -77,7 +90,7 @@ void Pda::addTransition(const std::string& from_str,
                         const Symbol& input_symbol,
                         const Symbol& stack_symbol,
                         const std::string& to_str,
-                        const std::vector<Symbol>& new_stack_symbols) {
+                        const std::string& new_stack_symbols) {
 
   states_[from_str]->addTransition(Transition(input_symbol,
                                               stack_symbol,

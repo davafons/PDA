@@ -25,6 +25,9 @@ public:
 
   void setStackStartSymbol(const Symbol& symbol);
 
+  void setFinalSymbols(const std::string& names);
+
+  State* state(const std::string& name);
   const State* state(const std::string& name) const;
   void addState(const std::string& s);
 
@@ -35,7 +38,7 @@ public:
                      const Symbol& input_symbol,
                      const Symbol& stack_symbol,
                      const std::string& st,
-                     const std::vector<Symbol>& new_stack_symbols);
+                     const std::string& new_stack_symbols);
 
 private:
   Tape input_tape_;

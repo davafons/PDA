@@ -7,7 +7,7 @@ namespace pda {
 Transition::Transition(const Symbol& input_symbol,
                        const Symbol& stack_symbol,
                        const State* next_state,
-                       const std::vector<Symbol>& new_stack_symbols,
+                       const std::string& new_stack_symbols,
                        Tape& tape,
                        Stack& stack)
 
@@ -38,9 +38,7 @@ const State* Transition::nextState() {
   tape_.get().next();
   stack_.get().pop();
 
-  for (const auto& symbol : new_stack_symbols_) {
-    stack_.get().push(symbol);
-  }
+  stack_.get().pushSymbols(new_stack_symbols_);
 
   return next_state_;
 }

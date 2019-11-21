@@ -16,19 +16,13 @@ int main() {
   pda.setStartState("p");
   pda.setStackStartSymbol("S");
 
-  // pda.addTransition("q1", "a", "Z", "q2", {"A", "Z"});
-  // pda.addTransition("q2", "a", "Z", "q1", {"A", "Z"});
-  //
-  // pda::Alphabet a;
-  // a.setSymbols("A B C");
-  //
-  // std::vector<pda::Symbol> asdf = a.split("ABCAB.");
-  //
-  // std::cout << asdf.size() << std::endl;
-  //
-  // for (const auto &s : asdf) {
-  //   std::cout << s << std::endl;
-  // }
+  pda.setFinalSymbols("r");
+
+  pda.addTransition("p", "0", "S", "p", "0 S");
+  pda.addTransition("p", "1", "S", "p", "1 S");
+  pda.addTransition("p", "0", "0", "p", "0 0");
+  pda.addTransition("p", "0", "1", "p", "0 1");
+  pda.addTransition("p", "1", "1", "p", "1 1");
 
   return 0;
 }
