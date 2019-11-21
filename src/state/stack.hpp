@@ -14,6 +14,10 @@ public:
   Alphabet& alphabet();
   const Alphabet& alphabet() const;
 
+  void setStartSymbol(const Symbol& symbol);
+
+  void clear();
+
 private:
   Alphabet alphabet_;
 };

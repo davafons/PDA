@@ -14,28 +14,14 @@ void Alphabet::addSymbol(Symbol symbol) {
   regex_ = std::regex(regex_str_);
 }
 
-template <typename Iter>
-void Alphabet::setSymbols(Iter begin, Iter end) {
-  reset();
-
-  for (Iter it = begin; it != end; ++it) {
-    addSymbol(*it);
-  }
-}
-
 void Alphabet::setSymbols(const std::vector<Symbol>& symbols) {
-  setSymbols(symbols.cbegin(), symbols.cend());
+  for (const auto& symbol : symbols) {
+    addSymbol(symbol);
+  }
 }
 
 void Alphabet::setSymbols(const std::string& symbols_str) {
-  reset();
-
-  std::stringstream symbols_stream(symbols_str);
-
-  Symbol symbol;
-  while (symbols_stream >> symbol) {
-    addSymbol(symbol);
-  }
+  setSymbols(splitSymbols(symbols_str));
 }
 
 std::vector<Symbol> Alphabet::split(const std::string& str) {

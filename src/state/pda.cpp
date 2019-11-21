@@ -29,7 +29,7 @@ const Alphabet& Pda::stackAlphabet() const {
   return stack_.alphabet();
 }
 
-State* Pda::startState() const {
+const State* Pda::startState() const {
   return start_state_;
 }
 
@@ -41,7 +41,11 @@ void Pda::setStartState(const std::string& name) {
   }
 }
 
-State* Pda::state(const std::string& name) const {
+void Pda::setStackStartSymbol(const Symbol& symbol) {
+  stack_.setStartSymbol(symbol);
+}
+
+const State* Pda::state(const std::string& name) const {
   try {
     return states_.at(name);
   } catch (std::out_of_range& e) {
@@ -57,6 +61,16 @@ void Pda::addState(const std::string& name) {
   } else {
     states_[name] = new State(name);
   }
+}
+
+void Pda::addStates(const std::vector<std::string>& names) {
+  for (const auto& name : names) {
+    addState(name);
+  }
+}
+
+void Pda::addStates(const std::string& names) {
+  addStates(splitSymbols(names));
 }
 
 void Pda::addTransition(const std::string& from_str,

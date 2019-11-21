@@ -1,7 +1,5 @@
 #include "tape.hpp"
 
-#include <sstream>
-
 namespace pda {
 
 Tape::Tape(const std::string& input_str) {
@@ -37,14 +35,7 @@ void Tape::reset() {
 }
 
 void Tape::setInputString(const std::string& input_str) {
-  reset();
-
-  std::stringstream input_stream(input_str);
-
-  Symbol symbol;
-  while (input_stream >> symbol) {
-    tape_.push_back(symbol);
-  }
+  tape_ = alphabet_.split(input_str);
 }
 
 std::ostream& operator<<(std::ostream& os, const Tape& t) {

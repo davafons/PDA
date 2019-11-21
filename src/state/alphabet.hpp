@@ -16,10 +16,7 @@ public:
 
   void addSymbol(Symbol symbol);
 
-  template <typename Iter>
-  void setSymbols(Iter begin, Iter end);
   void setSymbols(const std::vector<Symbol>& symbols);
-
   void setSymbols(const std::string& symbols_str);
 
   std::vector<Symbol> split(const std::string& input_str);

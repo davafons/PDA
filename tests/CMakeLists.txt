@@ -14,6 +14,7 @@ target_sources(
   ${PROJECT_SOURCE_DIR}/src/state/pda.cpp
   ${PROJECT_SOURCE_DIR}/src/state/alphabet.cpp
   ${PROJECT_SOURCE_DIR}/src/state/stack.cpp
+  ${PROJECT_SOURCE_DIR}/src/state/utils.cpp
 )
 
 target_link_libraries(pda_tests gtest_main)

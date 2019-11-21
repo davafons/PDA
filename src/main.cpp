@@ -9,38 +9,25 @@
 int main() {
   pda::Pda pda;
 
-  pda.addState("q1");
-  pda.addState("q2");
+  pda.addStates("p q r");
+  pda.tapeAlphabet().setSymbols("0 1");
+  pda.stackAlphabet().setSymbols("0 1 S");
 
-  pda.addTransition("q1", "a", "Z", "q2", {"A", "Z"});
-  pda.addTransition("q2", "a", "Z", "q1", {"A", "Z"});
+  pda.setStartState("p");
+  pda.setStackStartSymbol("S");
 
-  pda::Alphabet a;
-  a.setSymbols("A B C");
-
-  std::vector<pda::Symbol> asdf = a.split("ABCAB.");
-
-  std::cout << asdf.size() << std::endl;
-
-  for (const auto &s : asdf) {
-    std::cout << s << std::endl;
-  }
-
+  // pda.addTransition("q1", "a", "Z", "q2", {"A", "Z"});
+  // pda.addTransition("q2", "a", "Z", "q1", {"A", "Z"});
   //
-  // pda::Tape input_tape("a b c");
-  // std::stack<pda::Symbol> stack;
-  // stack.push("G");
+  // pda::Alphabet a;
+  // a.setSymbols("A B C");
   //
-  // auto *q1 = new pda::State("q1");
-  // auto *q2 = new pda::State("q2");
+  // std::vector<pda::Symbol> asdf = a.split("ABCAB.");
   //
-  // q1->addTransition(pda::Transition("a", "Z", q2, "AZ", input_tape, stack));
-  // q1->addTransition(pda::Transition("a", "G", q1, "AZ", input_tape, stack));
+  // std::cout << asdf.size() << std::endl;
   //
-  // auto *n = q1->transition("a", "G");
-  //
-  // if (n) {
-  //   std::cout << n->name() << std::endl;
+  // for (const auto &s : asdf) {
+  //   std::cout << s << std::endl;
   // }
 
   return 0;
