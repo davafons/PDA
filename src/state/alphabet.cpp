@@ -4,6 +4,10 @@ namespace pda {
 
 Alphabet::Alphabet() {}
 
+bool Alphabet::empty() const {
+  return regex_str_ == "\\.";
+}
+
 void Alphabet::reset() {
   regex_str_ = "\\.";
 }

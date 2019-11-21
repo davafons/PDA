@@ -2,7 +2,13 @@
 
 namespace pda {
 
-Tape::Tape(const std::string& input_str) {
+Tape::Tape(const std::string& input_str, const std::string& alphabet_str) {
+  if (alphabet_str.empty()) {
+    alphabet_.setSymbols(input_str);
+  } else {
+    alphabet_.setSymbols(alphabet_str);
+  }
+
   setInputString(input_str);
 }
 

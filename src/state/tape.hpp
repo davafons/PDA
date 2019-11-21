@@ -9,7 +9,8 @@ namespace pda {
 
 class Tape {
 public:
-  explicit Tape(const std::string& input_str = "");
+  explicit Tape(const std::string& input_str = "",
+                const std::string& alphabet_str = "");
 
   Alphabet& alphabet();
   const Alphabet& alphabet() const;

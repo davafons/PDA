@@ -12,6 +12,8 @@ class Alphabet {
 public:
   Alphabet();
 
+  bool empty() const;
+
   void reset();
 
   void addSymbol(Symbol symbol);
