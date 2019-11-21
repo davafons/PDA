@@ -16,9 +16,9 @@ int main() {
   pda.addTransition("q2", "a", "Z", "q1", {"A", "Z"});
 
   pda::Alphabet a;
-  a.addSymbols({"a", "b", "c"});
+  a.setSymbols("A B C");
 
-  std::vector<pda::Symbol> asdf = a.split("abcd");
+  std::vector<pda::Symbol> asdf = a.split("ABCAB.");
 
   std::cout << asdf.size() << std::endl;
 

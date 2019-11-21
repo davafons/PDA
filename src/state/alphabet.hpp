@@ -12,16 +12,20 @@ class Alphabet {
 public:
   Alphabet();
 
+  void reset();
+
   void addSymbol(Symbol symbol);
 
   template <typename Iter>
-  void addSymbols(Iter begin, Iter end);
-  void addSymbols(const std::vector<Symbol>& symbols);
+  void setSymbols(Iter begin, Iter end);
+  void setSymbols(const std::vector<Symbol>& symbols);
+
+  void setSymbols(const std::string& symbols_str);
 
   std::vector<Symbol> split(const std::string& input_str);
 
 private:
-  std::string regex_str_{" "};
+  std::string regex_str_{"\\."};
   std::regex regex_;
 };
 
