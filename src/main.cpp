@@ -10,7 +10,7 @@
 
 int main() {
   pda::Tape input_tape("a b c");
-  std::stack<std::string> stack;
+  std::stack<pda::Symbol> stack;
   stack.push("G");
 
   auto *q1 = new pda::State("q1");
