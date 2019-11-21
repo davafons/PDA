@@ -14,16 +14,13 @@ public:
   std::string name() const;
   void setName(const std::string& name);
 
-  State* transition(const std::string& input_symbol, const std::string& stack_symbol);
-
-  void addTransition(const std::string& input_symbol,
-                     const std::string& stack_symbol,
-                     const Transition& transition);
+  const State* transition(const Symbol& input_symbol, const Symbol& stack_symbol);
+  void addTransition(const Transition& transition);
 
 private:
   std::string name_;
 
-  std::map<std::string, Transition> transitions_;
+  std::map<std::pair<Symbol, Symbol>, Transition> transitions_;
 };
 
 }  // namespace pda

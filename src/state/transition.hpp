@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <stack>
 #include <string>
 
@@ -21,16 +22,20 @@ public:
              Tape& tape,
              Stack& stack);
 
+  Symbol inputSymbol() const;
+  Symbol stackSymbol() const;
+
   const State* nextState();
 
 private:
-  const Symbol& input_symbol_;
-  const Symbol& stack_symbol_;
-  const State* next_state_;
-  const Symbol& next_stack_symbol_;
+  Symbol input_symbol_;
+  Symbol stack_symbol_;
+  Symbol next_stack_symbol_;
 
-  Tape& tape_;
-  Stack& stack_;
+  const State* next_state_;
+
+  std::reference_wrapper<Tape> tape_;
+  std::reference_wrapper<Stack> stack_;
 };
 
 }  // namespace pda

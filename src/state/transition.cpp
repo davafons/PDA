@@ -18,18 +18,26 @@ Transition::Transition(const Symbol& input_symbol,
       tape_(tape),
       stack_(stack) {}
 
+Symbol Transition::inputSymbol() const {
+  return input_symbol_;
+}
+
+Symbol Transition::stackSymbol() const {
+  return stack_symbol_;
+}
+
 const State* Transition::nextState() {
-  if (input_symbol_ != tape_.peek()) {
+  if (input_symbol_ != tape_.get().peek()) {
     return nullptr;
   }
 
-  if (stack_symbol_ != stack_.top()) {
+  if (stack_symbol_ != stack_.get().top()) {
     return nullptr;
   }
 
-  tape_.next();
-  stack_.pop();
-  stack_.push(next_stack_symbol_);
+  tape_.get().next();
+  stack_.get().pop();
+  stack_.get().push(next_stack_symbol_);
 
   return next_state_;
 }

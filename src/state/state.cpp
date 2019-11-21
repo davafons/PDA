@@ -12,8 +12,14 @@ void State::setName(const std::string& name) {
   name_ = name;
 }
 
-void State::addTransition(const std::string& input_symbol,
-                          const std::string& stack_symbol,
-                          const Transition& transition) {}
+const State* State::transition(const Symbol& input_symbol, const Symbol& stack_symbol) {
+  return transitions_.at(std::make_pair(input_symbol, stack_symbol)).nextState();
+}
+
+void State::addTransition(const Transition& transition) {
+  auto key = std::make_pair(transition.inputSymbol(), transition.stackSymbol());
+
+  transitions_.emplace(key, transition);
+}
 
 }  // namespace pda
