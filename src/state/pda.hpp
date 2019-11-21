@@ -2,6 +2,7 @@
 
 #include <map>
 
+#include "stack.hpp"
 #include "state.hpp"
 #include "tape.hpp"
 #include "utils.hpp"
@@ -12,6 +13,12 @@ class Pda {
 public:
   Pda();
   ~Pda();
+
+  Alphabet& tapeAlphabet();
+  const Alphabet& tapeAlphabet() const;
+
+  Alphabet& stackAlphabet();
+  const Alphabet& stackAlphabet() const;
 
   State* startState() const;
   void setStartState(const std::string& name);

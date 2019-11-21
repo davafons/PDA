@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "alphabet.hpp"
 #include "utils.hpp"
 
 namespace pda {
@@ -9,6 +10,9 @@ namespace pda {
 class Tape {
 public:
   explicit Tape(const std::string& input_str = "");
+
+  Alphabet& alphabet();
+  const Alphabet& alphabet() const;
 
   int size() const;
 
@@ -24,6 +28,8 @@ public:
   friend std::ostream& operator<<(std::ostream& os, const Tape& tape);
 
 private:
+  Alphabet alphabet_;
+
   std::vector<Symbol> tape_;
 
   int tape_head_{0};

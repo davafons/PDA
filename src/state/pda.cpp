@@ -14,6 +14,21 @@ Pda::~Pda() {
   }
 }
 
+Alphabet& Pda::tapeAlphabet() {
+  return input_tape_.alphabet();
+}
+const Alphabet& Pda::tapeAlphabet() const {
+  return input_tape_.alphabet();
+}
+
+Alphabet& Pda::stackAlphabet() {
+  return stack_.alphabet();
+}
+
+const Alphabet& Pda::stackAlphabet() const {
+  return stack_.alphabet();
+}
+
 State* Pda::startState() const {
   return start_state_;
 }

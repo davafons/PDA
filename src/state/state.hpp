@@ -4,6 +4,7 @@
 #include <string>
 
 #include "state/transition.hpp"
+#include "state/utils.hpp"
 
 namespace pda {
 

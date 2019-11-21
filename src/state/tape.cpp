@@ -8,6 +8,13 @@ Tape::Tape(const std::string& input_str) {
   setInputString(input_str);
 }
 
+Alphabet& Tape::alphabet() {
+  return alphabet_;
+}
+const Alphabet& Tape::alphabet() const {
+  return alphabet_;
+}
+
 int Tape::size() const {
   return tape_.size();
 }

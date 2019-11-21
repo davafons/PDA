@@ -12,6 +12,8 @@ target_sources(
   ${PROJECT_SOURCE_DIR}/src/state/transition.cpp
   ${PROJECT_SOURCE_DIR}/src/state/tape.cpp
   ${PROJECT_SOURCE_DIR}/src/state/pda.cpp
+  ${PROJECT_SOURCE_DIR}/src/state/alphabet.cpp
+  ${PROJECT_SOURCE_DIR}/src/state/stack.cpp
 )
 
 target_link_libraries(pda_tests gtest_main)

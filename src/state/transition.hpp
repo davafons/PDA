@@ -1,16 +1,14 @@
 #pragma once
 
 #include <functional>
-#include <stack>
 #include <string>
 #include <vector>
 
+#include "stack.hpp"
 #include "tape.hpp"
+#include "utils.hpp"
 
 namespace pda {
-
-using Symbol = std::string;
-using Stack = std::stack<Symbol>;
 
 class State;
 
