@@ -7,14 +7,14 @@ namespace pda {
 Transition::Transition(const Symbol& input_symbol,
                        const Symbol& stack_symbol,
                        const State* next_state,
-                       const Symbol& next_stack_symbol,
+                       const std::vector<Symbol>& new_stack_symbols,
                        Tape& tape,
                        Stack& stack)
 
     : input_symbol_(input_symbol),
       stack_symbol_(stack_symbol),
       next_state_(next_state),
-      next_stack_symbol_(next_stack_symbol),
+      new_stack_symbols_(new_stack_symbols),
       tape_(tape),
       stack_(stack) {}
 
@@ -37,7 +37,10 @@ const State* Transition::nextState() {
 
   tape_.get().next();
   stack_.get().pop();
-  stack_.get().push(next_stack_symbol_);
+
+  for (const auto& symbol : new_stack_symbols_) {
+    stack_.get().push(symbol);
+  }
 
   return next_state_;
 }

@@ -44,14 +44,18 @@ void Pda::addState(const std::string& name) {
   }
 }
 
-void Pda::addTransition(const std::string& sf,
+void Pda::addTransition(const std::string& from_str,
                         const Symbol& input_symbol,
                         const Symbol& stack_symbol,
-                        const std::string& st,
-                        const Symbol& next_stack_symbol) {
+                        const std::string& to_str,
+                        const std::vector<Symbol>& new_stack_symbols) {
 
-  states_[sf]->addTransition(Transition(
-      input_symbol, stack_symbol, states_[st], next_stack_symbol, input_tape_, stack_));
+  states_[from_str]->addTransition(Transition(input_symbol,
+                                              stack_symbol,
+                                              states_[to_str],
+                                              new_stack_symbols,
+                                              input_tape_,
+                                              stack_));
 }
 
 }  // namespace pda

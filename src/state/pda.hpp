@@ -23,7 +23,7 @@ public:
                      const Symbol& input_symbol,
                      const Symbol& stack_symbol,
                      const std::string& st,
-                     const Symbol& next_stack_symbol);
+                     const std::vector<Symbol>& new_stack_symbols);
 
 private:
   Tape input_tape_;

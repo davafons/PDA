@@ -3,6 +3,7 @@
 #include <functional>
 #include <stack>
 #include <string>
+#include <vector>
 
 #include "tape.hpp"
 
@@ -18,7 +19,7 @@ public:
   Transition(const Symbol& input_symbol,
              const Symbol& stack_symbol,
              const State* next_state,
-             const Symbol& next_stack_symbols,
+             const std::vector<Symbol>& new_stack_symbols,
              Tape& tape,
              Stack& stack);
 
@@ -30,7 +31,7 @@ public:
 private:
   Symbol input_symbol_;
   Symbol stack_symbol_;
-  Symbol next_stack_symbol_;
+  std::vector<Symbol> new_stack_symbols_;
 
   const State* next_state_;
 

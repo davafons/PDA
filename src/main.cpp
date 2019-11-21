@@ -12,8 +12,8 @@ int main() {
   pda.addState("q2");
   pda.addState("q1");
 
-  pda.addTransition("q1", "a", "Z", "q2", "AZ");
-  pda.addTransition("q2", "a", "Z", "q1", "AZ");
+  pda.addTransition("q1", "a", "Z", "q2", {"A", "Z"});
+  pda.addTransition("q2", "a", "Z", "q1", {"A", "Z"});
 
   //
   // pda::Tape input_tape("a b c");
