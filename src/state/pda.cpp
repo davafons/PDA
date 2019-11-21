@@ -1,5 +1,7 @@
 #include "pda.hpp"
 
+#include <iostream>
+
 #include "transition.hpp"
 
 namespace pda {
@@ -12,12 +14,30 @@ Pda::~Pda() {
   }
 }
 
+void Pda::setStartState(const std::string& name) {
+  if (name.empty()) {
+    start_state_ = nullptr;
+  } else {
+    start_state_ = state(name);
+  }
+}
+
 State* Pda::state(const std::string& name) const {
-  return states_[name];
+  try {
+    return states_.at(name);
+  } catch (std::out_of_range& e) {
+    std::cerr << "> ERROR: State " << name << " is not defined." << std::endl;
+  }
+  return nullptr;
 }
 
 void Pda::addState(const std::string& name) {
-  states_[name] = new State(name);
+  if (states_.count(name)) {
+    std::cerr << "> WARNING: A state with name \"" << name
+              << "\" already exists. The state WILL NOT be replaced." << std::endl;
+  } else {
+    states_[name] = new State(name);
+  }
 }
 
 void Pda::addTransition(const std::string& sf,

@@ -13,6 +13,8 @@ public:
   Pda();
   ~Pda();
 
+  void setStartState(const std::string& name);
+
   State* state(const std::string& name) const;
   void addState(const std::string& s);
 
@@ -27,6 +29,8 @@ private:
   Stack stack_;
 
   std::map<std::string, State*> states_;
+
+  State* start_state_{nullptr};
 };
 
 }  // namespace pda

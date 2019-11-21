@@ -3,27 +3,34 @@
 #include <stack>
 #include <string>
 
-#include "state/state.hpp"
-#include "state/tape.hpp"
-#include "state/transition.hpp"
-#include "state/utils.hpp"
+#include "state/pda.hpp"
 
 int main() {
-  pda::Tape input_tape("a b c");
-  std::stack<pda::Symbol> stack;
-  stack.push("G");
+  pda::Pda pda;
 
-  auto *q1 = new pda::State("q1");
-  auto *q2 = new pda::State("q2");
+  pda.addState("q1");
+  pda.addState("q2");
+  pda.addState("q1");
 
-  q1->addTransition(pda::Transition("a", "Z", q2, "AZ", input_tape, stack));
-  q1->addTransition(pda::Transition("a", "G", q1, "AZ", input_tape, stack));
+  pda.addTransition("q1", "a", "Z", "q2", "AZ");
+  pda.addTransition("q2", "a", "Z", "q1", "AZ");
 
-  auto *n = q1->transition("a", "G");
-
-  if (n) {
-    std::cout << n->name() << std::endl;
-  }
+  //
+  // pda::Tape input_tape("a b c");
+  // std::stack<pda::Symbol> stack;
+  // stack.push("G");
+  //
+  // auto *q1 = new pda::State("q1");
+  // auto *q2 = new pda::State("q2");
+  //
+  // q1->addTransition(pda::Transition("a", "Z", q2, "AZ", input_tape, stack));
+  // q1->addTransition(pda::Transition("a", "G", q1, "AZ", input_tape, stack));
+  //
+  // auto *n = q1->transition("a", "G");
+  //
+  // if (n) {
+  //   std::cout << n->name() << std::endl;
+  // }
 
   return 0;
 }
