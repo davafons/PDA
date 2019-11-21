@@ -14,6 +14,10 @@ Pda::~Pda() {
   }
 }
 
+State* Pda::startState() const {
+  return start_state_;
+}
+
 void Pda::setStartState(const std::string& name) {
   if (name.empty()) {
     start_state_ = nullptr;

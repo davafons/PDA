@@ -13,6 +13,7 @@ public:
   Pda();
   ~Pda();
 
+  State* startState() const;
   void setStartState(const std::string& name);
 
   State* state(const std::string& name) const;

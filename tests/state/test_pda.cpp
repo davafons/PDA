@@ -26,3 +26,22 @@ TEST(Pda, addState_dont_replace) {
 
   ASSERT_EQ(q1, pda.state("q1"));
 }
+
+TEST(Pda, setStartState) {
+  pda::Pda pda;
+
+  pda.addState("q1");
+
+  // Initially, the start state must be null
+  ASSERT_EQ(pda.startState(), nullptr);
+
+  pda.setStartState("q1");
+
+  // Now, start state must be "q1"
+  ASSERT_EQ(pda.startState(), pda.state("q1"));
+
+  pda.setStartState("");
+
+  // Start state must be null again
+  ASSERT_EQ(pda.startState(), nullptr);
+}
