@@ -16,13 +16,11 @@ int main() {
   pda.setStartState("p");
   pda.setStackStartSymbol("S");
 
-  pda.setFinalSymbols("r");
+  pda.setFinalStates("r");
 
-  pda.addTransition("p", "0", "S", "p", "0 S");
-  pda.addTransition("p", "1", "S", "p", "1 S");
-  pda.addTransition("p", "0", "0", "p", "0 0");
-  pda.addTransition("p", "0", "1", "p", "0 1");
-  pda.addTransition("p", "1", "1", "p", "1 1");
+  pda.addTransition("p", "0", "S", "r", "0 S");
+
+  std::cout << pda.run("0") << std::endl;
 
   return 0;
 }

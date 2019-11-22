@@ -6,7 +6,7 @@ namespace pda {
 
 Transition::Transition(const Symbol& input_symbol,
                        const Symbol& stack_symbol,
-                       const State* next_state,
+                       State* next_state,
                        const std::string& new_stack_symbols,
                        Tape& tape,
                        Stack& stack)
@@ -26,7 +26,7 @@ Symbol Transition::stackSymbol() const {
   return stack_symbol_;
 }
 
-const State* Transition::nextState() {
+State* Transition::nextState() {
   if (input_symbol_ != tape_.get().peek()) {
     return nullptr;
   }

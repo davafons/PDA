@@ -16,7 +16,7 @@ void State::setFinal(bool f) {
   final_ = f;
 }
 
-const State* State::transition(const Symbol& input_symbol, const Symbol& stack_symbol) {
+State* State::transition(const Symbol& input_symbol, const Symbol& stack_symbol) {
   return transitions_.at(std::make_pair(input_symbol, stack_symbol)).nextState();
 }
 

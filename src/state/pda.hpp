@@ -25,10 +25,11 @@ public:
 
   void setStackStartSymbol(const Symbol& symbol);
 
-  void setFinalSymbols(const std::string& names);
+  void setFinalStates(const std::string& names);
 
-  State* state(const std::string& name);
-  const State* state(const std::string& name) const;
+  bool run(const std::string& input);
+
+  State* state(const std::string& name) const;
   void addState(const std::string& s);
 
   void addStates(const std::vector<std::string>& names);
@@ -46,7 +47,7 @@ private:
 
   std::map<std::string, State*> states_;
 
-  const State* start_state_{nullptr};
+  State* start_state_{nullptr};
 };
 
 }  // namespace pda
