@@ -16,7 +16,7 @@ public:
   bool isFinal() const;
   void setFinal(bool f);
 
-  State* transition(const Symbol& input_symbol, const Symbol& stack_symbol);
+  Transition& transition(const Symbol& input_symbol, const Symbol& stack_symbol);
   void addTransition(const Transition& transition);
 
 private:

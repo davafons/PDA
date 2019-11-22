@@ -26,6 +26,8 @@ public:
 
   State* nextState();
 
+  friend std::ostream& operator<<(std::ostream& os, const Transition& t);
+
 private:
   Symbol input_symbol_;
   Symbol stack_symbol_;

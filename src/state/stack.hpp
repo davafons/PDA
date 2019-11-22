@@ -20,6 +20,8 @@ public:
 
   void clear();
 
+  friend std::ostream& operator<<(std::ostream& os, const Stack& s);
+
 private:
   Alphabet alphabet_;
 };

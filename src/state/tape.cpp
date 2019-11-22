@@ -1,5 +1,7 @@
 #include "tape.hpp"
 
+#include <iomanip>
+
 namespace pda {
 
 Tape::Tape(const std::string& input_str, const std::string& alphabet_str) {
@@ -32,7 +34,7 @@ void Tape::next() {
 }
 
 bool Tape::hasNext() const {
-  return tape_head_ >= -1 && tape_head_ < size() - 1;
+  return tape_head_ >= -1 && tape_head_ < size();
 }
 
 void Tape::reset() {
@@ -51,7 +53,9 @@ std::ostream& operator<<(std::ostream& os, const Tape& t) {
     os << s << " ";
   }
 
-  os << "]";
+  os << "]\n";
+
+  os << std::setw(1 + (t.tape_head_ + 1) * 2) << "^" << std::endl;
 
   return os;
 }

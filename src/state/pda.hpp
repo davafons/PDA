@@ -11,6 +11,8 @@ namespace pda {
 
 class Pda {
 public:
+  enum class Type { EmptyStack = 1, FinalState = 2 };
+
   Pda();
   ~Pda();
 
@@ -27,6 +29,8 @@ public:
 
   void setFinalStates(const std::string& names);
 
+  void setPdaType(Type type);
+
   bool run(const std::string& input);
 
   State* state(const std::string& name) const;
@@ -42,6 +46,8 @@ public:
                      const std::string& new_stack_symbols);
 
 private:
+  Type pda_type_{Type::EmptyStack};
+
   Tape input_tape_;
   Stack stack_;
 

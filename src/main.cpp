@@ -9,18 +9,21 @@
 int main() {
   pda::Pda pda;
 
-  pda.addStates("p q r");
-  pda.tapeAlphabet().setSymbols("0 1");
-  pda.stackAlphabet().setSymbols("0 1 S");
+  pda.addStates("q1 q2");
+  pda.tapeAlphabet().setSymbols("a b");
+  pda.stackAlphabet().setSymbols("S A");
 
-  pda.setStartState("p");
+  pda.setStartState("q1");
   pda.setStackStartSymbol("S");
 
-  pda.setFinalStates("r");
+  pda.addTransition("q1", "a", "S", "q1", "A");
+  pda.addTransition("q1", "a", "A", "q1", "A A");
+  pda.addTransition("q1", "b", "A", "q2", ".");
+  pda.addTransition("q2", "b", "A", "q2", ".");
 
-  pda.addTransition("p", "0", "S", "r", "0 S");
+  bool result = pda.run("aabb");
 
-  std::cout << pda.run("0") << std::endl;
+  std::cout << result << std::endl;
 
   return 0;
 }

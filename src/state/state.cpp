@@ -16,8 +16,9 @@ void State::setFinal(bool f) {
   final_ = f;
 }
 
-State* State::transition(const Symbol& input_symbol, const Symbol& stack_symbol) {
-  return transitions_.at(std::make_pair(input_symbol, stack_symbol)).nextState();
+Transition& State::transition(const Symbol& input_symbol, const Symbol& stack_symbol) {
+  // TODO: Throw error if cant find transition
+  return transitions_.at(std::make_pair(input_symbol, stack_symbol));
 }
 
 void State::addTransition(const Transition& transition) {

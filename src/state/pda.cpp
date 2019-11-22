@@ -54,19 +54,35 @@ void Pda::setFinalStates(const std::string& names) {
   }
 }
 
+void Pda::setPdaType(Type type) {
+  pda_type_ = type;
+}
+
 bool Pda::run(const std::string& input_str) {
   input_tape_.setInputString(input_str);
 
   State* current = start_state_;
   do {
+    std::cout << input_tape_;
+    std::cout << "Stack: " << stack_ << std::endl;
+
+    std::cout << "Current state: " << current->name() << std::endl;
+
     Symbol input_symbol = input_tape_.peek();
     Symbol stack_symbol = stack_.top();
+    Transition& t = current->transition(input_symbol, stack_symbol);
 
-    current = current->transition(input_symbol, stack_symbol);
+    std::cout << "> Transition: " << t << std::endl;
+
+    current = t.nextState();
 
   } while (input_tape_.hasNext());
 
-  return (current && current->isFinal());
+  if (pda_type_ == Type::FinalState) {
+    return (current && current->isFinal());
+  } else {
+    return stack_.empty();
+  }
 }
 
 State* Pda::state(const std::string& name) const {

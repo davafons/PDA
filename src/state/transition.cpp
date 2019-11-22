@@ -26,6 +26,14 @@ Symbol Transition::stackSymbol() const {
   return stack_symbol_;
 }
 
+std::ostream& operator<<(std::ostream& os, const Transition& t) {
+  os << "(" << t.input_symbol_ << ", " << t.stack_symbol_ << ") => {"
+     << t.next_state_->name() << ", " << t.new_stack_symbols_ << "}" << std::endl;
+
+  return os;
+
+}  // namespace pda
+
 State* Transition::nextState() {
   if (input_symbol_ != tape_.get().peek()) {
     return nullptr;
@@ -36,7 +44,11 @@ State* Transition::nextState() {
   }
 
   tape_.get().next();
-  stack_.get().pop();
+
+  // TODO: Throw error
+  if (!stack_.get().empty()) {
+    stack_.get().pop();
+  }
 
   stack_.get().pushSymbols(new_stack_symbols_);
 
