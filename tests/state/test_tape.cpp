@@ -26,5 +26,7 @@ TEST(Tape, read_symbols) {
   tape.next();
   ASSERT_EQ(tape.peek(), "c");
 
+  std::cout << "Size: " << tape.size() << std::endl;
+
   ASSERT_FALSE(tape.hasNext());
 }

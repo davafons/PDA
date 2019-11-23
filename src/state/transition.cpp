@@ -26,14 +26,6 @@ Symbol Transition::stackSymbol() const {
   return stack_symbol_;
 }
 
-std::ostream& operator<<(std::ostream& os, const Transition& t) {
-  os << "(" << t.input_symbol_ << ", " << t.stack_symbol_ << ") => {"
-     << t.next_state_->name() << ", " << t.new_stack_symbols_ << "}" << std::endl;
-
-  return os;
-
-}  // namespace pda
-
 State* Transition::nextState() {
   if (input_symbol_ != tape_.get().peek()) {
     return nullptr;
@@ -53,6 +45,21 @@ State* Transition::nextState() {
   stack_.get().pushSymbols(new_stack_symbols_);
 
   return next_state_;
+}
+
+bool Transition::operator==(const Transition& other) const {
+  return input_symbol_ == other.input_symbol_ && stack_symbol_ == other.stack_symbol_ &&
+         new_stack_symbols_ == other.new_stack_symbols_ &&
+         next_state_ == other.next_state_ &&
+         std::addressof(tape_.get()) == std::addressof(other.tape_.get()) &&
+         std::addressof(stack_.get()) == std::addressof(other.stack_.get());
+}
+
+std::ostream& operator<<(std::ostream& os, const Transition& t) {
+  os << "(" << t.input_symbol_ << ", " << t.stack_symbol_ << ") => {"
+     << t.next_state_->name() << ", " << t.new_stack_symbols_ << "}" << std::endl;
+
+  return os;
 }
 
 }  // namespace pda

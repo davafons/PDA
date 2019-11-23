@@ -1,6 +1,7 @@
 #include "tape.hpp"
 
 #include <iomanip>
+#include <iostream>
 
 namespace pda {
 
@@ -34,7 +35,7 @@ void Tape::next() {
 }
 
 bool Tape::hasNext() const {
-  return tape_head_ >= -1 && tape_head_ < size();
+  return tape_head_ >= -1 && tape_head_ < size() - 1;
 }
 
 void Tape::reset() {
