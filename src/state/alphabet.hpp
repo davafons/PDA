@@ -24,7 +24,7 @@ public:
   std::vector<Symbol> split(const std::string& input_str);
 
 private:
-  std::string regex_str_{"\\."};
+  std::string regex_str_{"\\" + Constant::lambda};
   std::regex regex_;
 };
 

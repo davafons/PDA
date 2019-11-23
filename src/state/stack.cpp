@@ -18,7 +18,7 @@ void Stack::setStartSymbol(const Symbol& symbol) {
 
 void Stack::pushSymbols(const std::string& symbols_str) {
   for (const auto& symbol : alphabet_.split(symbols_str)) {
-    if (symbol != ".") {
+    if (symbol != Constant::lambda) {
       push(symbol);
     }
   }

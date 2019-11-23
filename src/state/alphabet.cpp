@@ -5,11 +5,11 @@ namespace pda {
 Alphabet::Alphabet() {}
 
 bool Alphabet::empty() const {
-  return regex_str_ == "\\.";
+  return regex_str_ == "\\" + Constant::lambda;
 }
 
 void Alphabet::reset() {
-  regex_str_ = "\\.";
+  regex_str_ = "\\" + Constant::lambda;
 }
 
 void Alphabet::addSymbol(Symbol symbol) {

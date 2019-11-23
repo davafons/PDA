@@ -1,9 +1,15 @@
+#pragma once
+
 #include <iterator>
 #include <sstream>
 #include <string>
 #include <vector>
 
 namespace pda {
+
+namespace Constant {
+const std::string lambda = ".";
+}
 
 using Symbol = std::string;
 
