@@ -12,6 +12,21 @@ endif()
 add_executable(${PROJECT_NAME})
 add_subdirectory(src)
 
+# Add required flags (GCC & LLVM/Clang)
+target_compile_options(${PROJECT_NAME} PUBLIC
+-O0        # no optimization
+-g         # generate debug info
+-fprofile-arcs
+-ftest-coverage
+--coverage # sets all required flags
+)
+
+if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.13)
+  target_link_options(${PROJECT_NAME} PUBLIC --coverage)
+else()
+  target_link_libraries(${PROJECT_NAME} PUBLIC --coverage)
+endif()
+
 include(cmake/googletest.cmake)
 fetch_googletest(
   ${PROJECT_SOURCE_DIR}/cmake
