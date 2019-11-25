@@ -9,6 +9,8 @@
 
 namespace pda {
 
+class Pda;
+
 class State {
 public:
   explicit State(const std::string& name);
@@ -17,9 +19,11 @@ public:
   bool isFinal() const;
   void setFinal(bool f);
 
-  std::unordered_set<Transition>& transition(const Symbol& input_symbol,
-                                             const Symbol& stack_symbol);
+  std::unordered_set<Transition>& transitions(const Symbol& input_symbol,
+                                              const Symbol& stack_symbol);
   void addTransition(const Transition& transition);
+
+  friend std::ostream& operator<<(std::ostream& os, const State& state);
 
 private:
   const std::string name_;

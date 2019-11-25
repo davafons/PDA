@@ -1,49 +1,24 @@
-#include <functional>
+#include <iomanip>
 #include <iostream>
 #include <stack>
 #include <string>
 
 #include "pda/pda.hpp"
+#include "pda/pdabuilder.hpp"
 
-int main() {
-  pda::Pda pda;
+int main(int argc, char* argv[]) {
+  if (argc < 3) {
+    std::cout << "Usage: " << argv[0] << " pda.txt input_string" << std::endl;
+    return 1;
+  }
 
-  pda.setPdaType(pda::Pda::Type::FinalState);
+  pda::Pda pushdown_automata = pda::PdaBuilder::fromFile(argv[1]);
 
-  pda.addStates("q1 q2 q3");
+  std::cout << pushdown_automata << std::endl;
 
-  pda.tapeAlphabet().setSymbols("a b");
-  pda.stackAlphabet().setSymbols("S A");
+  std::cout << "Running: " << argv[1] << "..." << std::endl;
+  std::cout << "Result: " << std::boolalpha << pushdown_automata.run(argv[2])
+            << std::endl;
 
-  pda.setStartState("q1");
-  pda.setStackStartSymbol("S");
-
-  pda.setFinalStates("q3");
-
-  pda.addTransition("q1", "a", "S", "q1", "A S");
-  pda.addTransition("q1", "a", "A", "q1", "A A");
-  pda.addTransition("q1", "b", "A", "q2", ".");
-  pda.addTransition("q2", "b", "A", "q2", ".");
-  pda.addTransition("q2", ".", "S", "q3", "S");
-
-  bool result = pda.run("aabb");
-  std::cout << result << std::endl;
-
-  // pda.setPdaType(pda::Pda::Type::EmptyStack);
-  //
-  // pda.addStates("q1 q2");
-  // pda.tapeAlphabet().setSymbols("a b");
-  // pda.stackAlphabet().setSymbols("S A");
-  //
-  // pda.setStartState("q1");
-  // pda.setStackStartSymbol("S");
-  //
-  // pda.addTransition("q1", "a", "S", "q1", "A");
-  // pda.addTransition("q1", "a", "A", "q1", "A A");
-  // pda.addTransition("q1", "b", "A", "q2", ".");
-  // pda.addTransition("q2", "b", "A", "q2", ".");
-  //
-  // bool result = pda.run("aabb");
-  //
-  // std::cout << result << std::endl;
+  return 0;
 }

@@ -31,4 +31,13 @@ std::vector<Symbol> Alphabet::splitInSymbols(const std::string& symbols_str) {
           std::sregex_token_iterator()};
 }
 
+std::ostream& operator<<(std::ostream& os, const Alphabet& alphabet) {
+  std::string alphabet_symbols(alphabet.regex_str_);
+  std::replace(alphabet_symbols.begin(), alphabet_symbols.end(), '|', ' ');
+
+  os << alphabet_symbols;
+
+  return os;
+}
+
 }  // namespace pda

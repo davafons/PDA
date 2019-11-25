@@ -14,6 +14,10 @@ public:
   static const std::string lambda;
 
   static std::vector<std::string> split(const std::string& str);
+
+  static std::string& trim(std::string& str);
+  static std::string& ltrim(std::string& str);
+  static std::string& rtrim(std::string& str);
 };
 
 }  // namespace pda

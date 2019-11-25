@@ -23,6 +23,8 @@ public:
 
   std::vector<Symbol> splitInSymbols(const std::string& symbols_str);
 
+  friend std::ostream& operator<<(std::ostream& os, const Alphabet& alphabet);
+
 private:
   std::string regex_str_{"\\" + Utils::lambda};
   std::regex regex_;
