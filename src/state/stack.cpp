@@ -17,9 +17,11 @@ void Stack::setStartSymbol(const Symbol& symbol) {
 }
 
 void Stack::pushSymbols(const std::string& symbols_str) {
-  for (const auto& symbol : alphabet_.split(symbols_str)) {
-    if (symbol != Constant::lambda) {
-      push(symbol);
+  auto symbols = alphabet_.split(symbols_str);
+
+  for (auto symbol_it = symbols.crbegin(); symbol_it != symbols.crend(); ++symbol_it) {
+    if (*symbol_it != Constant::lambda) {
+      push(*symbol_it);
     }
   }
 }
@@ -31,7 +33,7 @@ void Stack::clear() {
 }
 
 std::ostream& operator<<(std::ostream& os, const Stack& s) {
-  os << "Top: [" << ((s.empty()) ? "" : s.top()) << "]" << std::endl;
+  os << "Top: [" << ((s.empty()) ? "" : s.top()) << "]";
 
   return os;
 }

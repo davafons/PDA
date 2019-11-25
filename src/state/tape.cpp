@@ -35,7 +35,7 @@ void Tape::next() {
 }
 
 bool Tape::hasNext() const {
-  return tape_head_ >= -1 && tape_head_ < size() - 1;
+  return tape_head_ >= -1 && tape_head_ < size();
 }
 
 void Tape::reset() {

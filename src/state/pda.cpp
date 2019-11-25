@@ -129,18 +129,58 @@ void Pda::addTransition(const std::string& from_str,
 }
 
 bool Pda::run(State* current_state, Tape& current_tape, Stack& current_stack) {
-  Symbol input_symbol = input_tape_.peek();
-  Symbol stack_symbol = stack_.top();
+  auto print_pda = [&current_state, &current_tape, &current_stack]() {
+    std::cout << "---------------------------" << std::endl;
+    std::cout << "Current state: " << current_state->name() << std::endl;
+    std::cout << current_tape << std::endl;
+    std::cout << "Stack: " << current_stack << std::endl;
+    std::cout << "---------------------------" << std::endl;
+  };
 
-  std::cout << "Current state: " << current_state->name() << std::endl;
-  std::cout << input_tape_ << std::endl;
-  std::cout << "Stack: " << stack_ << std::endl;
+  print_pda();
 
-  for (const auto& transition : current_state->transition(input_symbol, stack_symbol)) {
-    std::cout << "> Transition: " << transition << std::endl;
+  auto explore_transitions =
+      [this, &print_pda, &current_state, &current_tape, &current_stack](
+          const Symbol& input_symbol, const Symbol& stack_symbol) {
+        for (const auto& transition :
+             current_state->transition(input_symbol, stack_symbol)) {
+          std::cout << "> Transition: " << transition << std::endl;
+
+          Tape new_tape(current_tape);
+          Stack new_stack(current_stack);
+          State* new_state = transition.nextState(new_tape, new_stack);
+
+          bool result = run(new_state, new_tape, new_stack);
+
+          if (result) {
+            return true;
+          }
+
+          std::cout << ">> Can't continue. Going back to previous state" << std::endl;
+          print_pda();
+        }
+        return false;
+      };
+
+  if (current_tape.hasNext()) {
+    if (explore_transitions(current_tape.peek(), current_stack.top())) {
+      return true;
+    }
   }
 
-  return true;
+  if (explore_transitions(Constant::lambda, current_stack.top())) {
+    return true;
+  }
+
+  if (!current_tape.hasNext()) {
+    if (pda_type_ == Type::FinalState) {
+      return (current_state && current_state->isFinal());
+    } else {
+      return current_stack.empty();
+    }
+  }
+
+  return false;
 }
 
 }  // namespace pda

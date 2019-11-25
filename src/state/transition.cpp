@@ -28,7 +28,7 @@ Symbol Transition::stackSymbol() const {
 }
 
 State* Transition::nextState(Tape& current_tape, Stack& current_stack) const {
-  if (input_symbol_ != current_tape.peek()) {
+  if (input_symbol_ != Constant::lambda && input_symbol_ != current_tape.peek()) {
     return nullptr;
   }
 
@@ -36,12 +36,15 @@ State* Transition::nextState(Tape& current_tape, Stack& current_stack) const {
     return nullptr;
   }
 
-  current_tape.next();
-
-  // TODO: Throw error
-  if (!current_stack.empty()) {
-    current_stack.pop();
+  if (input_symbol_ != Constant::lambda) {
+    current_tape.next();
   }
+
+  if (current_stack.empty()) {
+    throw std::runtime_error("> ERROR: Stack is empty.");
+  }
+
+  current_stack.pop();
 
   current_stack.pushSymbols(new_stack_symbols_);
 
@@ -56,7 +59,7 @@ bool Transition::operator==(const Transition& other) const {
 
 std::ostream& operator<<(std::ostream& os, const Transition& t) {
   os << "(" << t.input_symbol_ << ", " << t.stack_symbol_ << ") => {"
-     << t.next_state_->name() << ", " << t.new_stack_symbols_ << "}" << std::endl;
+     << t.next_state_->name() << ", " << t.new_stack_symbols_ << "}";
 
   return os;
 }
