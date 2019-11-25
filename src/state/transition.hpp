@@ -7,14 +7,12 @@
 #include "stack.hpp"
 #include "tape.hpp"
 #include "utils.hpp"
-
 namespace pda {
 
 class State;
 
 class Transition {
 public:
-  Transition() = default;
   Transition(const Symbol& input_symbol,
              const Symbol& stack_symbol,
              State* next_state,
@@ -22,6 +20,8 @@ public:
 
   Symbol inputSymbol() const;
   Symbol stackSymbol() const;
+  std::string nextStateName() const;
+  std::string newStackSymbols() const;
 
   State* nextState(Tape& current_tape, Stack& current_stack) const;
 
@@ -38,3 +38,11 @@ private:
 };
 
 }  // namespace pda
+
+template <>
+struct std::hash<pda::Transition> {
+  size_t operator()(const pda::Transition& obj) const {
+    return std::hash<std::string>()(obj.inputSymbol() + obj.stackSymbol() +
+                                    obj.nextStateName() + obj.newStackSymbols());
+  }
+};

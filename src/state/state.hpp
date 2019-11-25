@@ -2,6 +2,7 @@
 
 #include <map>
 #include <string>
+#include <unordered_set>
 
 #include "state/transition.hpp"
 #include "state/utils.hpp"
@@ -16,16 +17,15 @@ public:
   bool isFinal() const;
   void setFinal(bool f);
 
-  std::vector<Transition>& transition(const Symbol& input_symbol,
-                                      const Symbol& stack_symbol);
+  std::unordered_set<Transition>& transition(const Symbol& input_symbol,
+                                             const Symbol& stack_symbol);
   void addTransition(const Transition& transition);
 
 private:
   const std::string name_;
-
   bool final_{false};
 
-  std::map<std::pair<Symbol, Symbol>, std::vector<Transition>> transitions_;
+  std::map<std::pair<Symbol, Symbol>, std::unordered_set<Transition>> transitions_;
 };
 
 }  // namespace pda

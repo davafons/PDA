@@ -17,7 +17,12 @@ Transition::Transition(const Symbol& input_symbol,
     : input_symbol_(input_symbol),
       stack_symbol_(stack_symbol),
       next_state_(next_state),
-      new_stack_symbols_(new_stack_symbols) {}
+      new_stack_symbols_(new_stack_symbols) {
+
+  new_stack_symbols_.erase(
+      std::remove_if(new_stack_symbols_.begin(), new_stack_symbols_.end(), ::isspace),
+      new_stack_symbols_.end());
+}
 
 Symbol Transition::inputSymbol() const {
   return input_symbol_;
@@ -25,6 +30,14 @@ Symbol Transition::inputSymbol() const {
 
 Symbol Transition::stackSymbol() const {
   return stack_symbol_;
+}
+
+std::string Transition::nextStateName() const {
+  return (next_state_) ? next_state_->name() : "";
+}
+
+std::string Transition::newStackSymbols() const {
+  return new_stack_symbols_;
 }
 
 State* Transition::nextState(Tape& current_tape, Stack& current_stack) const {

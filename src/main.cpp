@@ -22,11 +22,10 @@ int main() {
   pda.setFinalStates("q3");
 
   pda.addTransition("q1", "a", "S", "q1", "A S");
-  pda.addTransition("q1", "a", "S", "q2", "A S");
-  // pda.addTransition("q1", "a", "A", "q1", "A A");
-  // pda.addTransition("q1", "b", "A", "q2", ".");
-  // pda.addTransition("q2", "b", "A", "q2", ".");
-  // pda.addTransition("q2", ".", "S", "q3", "S");
+  pda.addTransition("q1", "a", "A", "q1", "A A");
+  pda.addTransition("q1", "b", "A", "q2", ".");
+  pda.addTransition("q2", "b", "A", "q2", ".");
+  pda.addTransition("q2", ".", "S", "q3", "S");
 
   bool result = pda.run("aabb");
   std::cout << result << std::endl;

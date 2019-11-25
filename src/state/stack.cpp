@@ -1,6 +1,37 @@
 #include "stack.hpp"
 
 namespace pda {
+bool Stack::empty() const noexcept {
+  return std::vector<Symbol>::empty();
+}
+
+Symbol& Stack::top() {
+  return std::vector<Symbol>::back();
+}
+
+const Symbol& Stack::top() const {
+  return std::vector<Symbol>::back();
+}
+
+void Stack::pop() {
+  std::vector<Symbol>::pop_back();
+}
+
+void Stack::setStartSymbol(const Symbol& symbol) {
+  clear();
+
+  std::vector<Symbol>::push_back(symbol);
+}
+
+void Stack::pushSymbols(const std::string& symbols_str) {
+  auto symbols = alphabet_.split(symbols_str);
+
+  for (auto symbol_it = symbols.crbegin(); symbol_it != symbols.crend(); ++symbol_it) {
+    if (*symbol_it != Constant::lambda) {
+      std::vector<Symbol>::push_back(*symbol_it);
+    }
+  }
+}
 
 Alphabet& Stack::alphabet() {
   return alphabet_;
@@ -10,30 +41,14 @@ const Alphabet& Stack::alphabet() const {
   return alphabet_;
 }
 
-void Stack::setStartSymbol(const Symbol& symbol) {
-  clear();
+std::ostream& operator<<(std::ostream& os, const Stack& st) {
+  os << "[ ";
 
-  push(symbol);
-}
-
-void Stack::pushSymbols(const std::string& symbols_str) {
-  auto symbols = alphabet_.split(symbols_str);
-
-  for (auto symbol_it = symbols.crbegin(); symbol_it != symbols.crend(); ++symbol_it) {
-    if (*symbol_it != Constant::lambda) {
-      push(*symbol_it);
-    }
+  for (auto it = st.crbegin(); it != st.crend(); ++it) {
+    os << *it << " ";
   }
-}
 
-void Stack::clear() {
-  while (!empty()) {
-    pop();
-  }
-}
-
-std::ostream& operator<<(std::ostream& os, const Stack& s) {
-  os << "Top: [" << ((s.empty()) ? "" : s.top()) << "]";
+  os << "]\n";
 
   return os;
 }

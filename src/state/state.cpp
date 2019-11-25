@@ -1,5 +1,7 @@
 #include "state.hpp"
 
+#include <iostream>
+
 namespace pda {
 
 State::State(const std::string& name) : name_(name) {
@@ -20,8 +22,8 @@ void State::setFinal(bool f) {
   final_ = f;
 }
 
-std::vector<Transition>& State::transition(const Symbol& input_symbol,
-                                           const Symbol& stack_symbol) {
+std::unordered_set<Transition>& State::transition(const Symbol& input_symbol,
+                                                  const Symbol& stack_symbol) {
   // TODO: Throw error if cant find transition
 
   auto key = std::make_pair(input_symbol, stack_symbol);
@@ -31,7 +33,7 @@ std::vector<Transition>& State::transition(const Symbol& input_symbol,
 void State::addTransition(const Transition& transition) {
   auto key = std::make_pair(transition.inputSymbol(), transition.stackSymbol());
 
-  transitions_[key].push_back(transition);
+  transitions_[key].insert(transition);
 }
 
 }  // namespace pda
