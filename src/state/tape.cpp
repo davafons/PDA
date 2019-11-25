@@ -56,7 +56,7 @@ std::ostream& operator<<(std::ostream& os, const Tape& t) {
 
   os << "]\n";
 
-  os << std::setw(1 + (t.tape_head_ + 1) * 2) << "^" << std::endl;
+  os << std::setw(1 + (t.tape_head_ + 1) * 2) << "^";
 
   return os;
 }

@@ -16,8 +16,8 @@ public:
   bool isFinal() const;
   void setFinal(bool f);
 
-  bool hasTransition(const Symbol& input_symbol, const Symbol& stack_symbol);
-  Transition& transition(const Symbol& input_symbol, const Symbol& stack_symbol);
+  std::vector<Transition>& transition(const Symbol& input_symbol,
+                                      const Symbol& stack_symbol);
   void addTransition(const Transition& transition);
 
 private:
@@ -25,7 +25,7 @@ private:
 
   bool final_{false};
 
-  std::map<std::pair<Symbol, Symbol>, Transition> transitions_;
+  std::map<std::pair<Symbol, Symbol>, std::vector<Transition>> transitions_;
 };
 
 }  // namespace pda

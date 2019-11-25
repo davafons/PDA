@@ -46,6 +46,9 @@ public:
                      const std::string& new_stack_symbols);
 
 private:
+  bool run(State* current_state, Tape& current_tape, Stack& current_stack);
+
+private:
   Type pda_type_{Type::EmptyStack};
 
   Tape input_tape_;

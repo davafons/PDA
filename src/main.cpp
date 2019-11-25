@@ -27,8 +27,8 @@ int main() {
   pda.addTransition("q2", "b", "A", "q2", ".");
   pda.addTransition("q2", ".", "S", "q3", "S");
 
-  // bool result = pda.run("aabb");
-  // std::cout << result << std::endl;
+  bool result = pda.run("aabb");
+  std::cout << result << std::endl;
 
   // pda.setPdaType(pda::Pda::Type::EmptyStack);
   //

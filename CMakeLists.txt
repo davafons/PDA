@@ -32,6 +32,6 @@ fetch_googletest(
   ${PROJECT_SOURCE_DIR}/cmake
   ${PROJECT_BINARY_DIR}/googletest
 )
-
-enable_testing()
-add_subdirectory(tests)
+#
+# enable_testing()
+# add_subdirectory(tests)

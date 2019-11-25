@@ -17,6 +17,7 @@ Pda::~Pda() {
 Alphabet& Pda::tapeAlphabet() {
   return input_tape_.alphabet();
 }
+
 const Alphabet& Pda::tapeAlphabet() const {
   return input_tape_.alphabet();
 }
@@ -62,36 +63,40 @@ bool Pda::run(const std::string& input_str) {
   input_tape_.setInputString(input_str);
 
   State* current = start_state_;
-  do {
-    std::cout << input_tape_;
-    std::cout << "Stack: " << stack_ << std::endl;
 
-    std::cout << "Current state: " << current->name() << std::endl;
+  return run(current, input_tape_, stack_);
 
-    Symbol input_symbol = input_tape_.peek();
-    Symbol stack_symbol = stack_.top();
-    Transition& t = current->transition(input_symbol, stack_symbol);
-
-    std::cout << "> Transition: " << t << std::endl;
-
-    current = t.nextState();
-
-  } while (input_tape_.hasNext());
-
-  if (pda_type_ == Type::FinalState) {
-    return (current && current->isFinal());
-  } else {
-    return stack_.empty();
-  }
+  // do {
+  //   std::cout << input_tape_;
+  //   std::cout << "Stack: " << stack_ << std::endl;
+  //
+  //   std::cout << "Current state: " << current->name() << std::endl;
+  //
+  //   Symbol input_symbol = input_tape_.peek();
+  //   Symbol stack_symbol = stack_.top();
+  //
+  //   for (const auto& t : current->transition(input_symbol, stack_symbol)) {
+  //     std::cout << "> Transition: " << t << std::endl;
+  //
+  //     current = t.nextState(input_tape_, stack_);
+  //   }
+  //
+  // } while (input_tape_.hasNext());
+  //
+  // if (pda_type_ == Type::FinalState) {
+  //   return (current && current->isFinal());
+  // } else {
+  //   return stack_.empty();
+  // }
 }
 
 State* Pda::state(const std::string& name) const {
   try {
     return states_.at(name);
+
   } catch (std::out_of_range& e) {
-    std::cerr << "> ERROR: State " << name << " is not defined." << std::endl;
+    throw std::runtime_error("> ERROR: State" + name + " is not defined.");
   }
-  return nullptr;
 }
 
 void Pda::addState(const std::string& name) {
@@ -119,12 +124,23 @@ void Pda::addTransition(const std::string& from_str,
                         const std::string& to_str,
                         const std::string& new_stack_symbols) {
 
-  states_[from_str]->addTransition(Transition(input_symbol,
-                                              stack_symbol,
-                                              states_[to_str],
-                                              new_stack_symbols,
-                                              input_tape_,
-                                              stack_));
+  state(from_str)->addTransition(
+      Transition(input_symbol, stack_symbol, state(to_str), new_stack_symbols));
+}
+
+bool Pda::run(State* current_state, Tape& current_tape, Stack& current_stack) {
+  Symbol input_symbol = input_tape_.peek();
+  Symbol stack_symbol = stack_.top();
+
+  std::cout << "Current state: " << current_state->name() << std::endl;
+  std::cout << input_tape_ << std::endl;
+  std::cout << "Stack: " << stack_ << std::endl;
+
+  for (const auto& transition : current_state->transition(input_symbol, stack_symbol)) {
+    std::cout << "> Transition: " << transition << std::endl;
+  }
+
+  return true;
 }
 
 }  // namespace pda

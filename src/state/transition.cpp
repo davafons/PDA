@@ -4,19 +4,20 @@
 
 namespace pda {
 
+/*!
+ *  \class Transition
+ *  \brief Represents a transition to a new state
+ */
+
 Transition::Transition(const Symbol& input_symbol,
                        const Symbol& stack_symbol,
                        State* next_state,
-                       const std::string& new_stack_symbols,
-                       Tape& tape,
-                       Stack& stack)
+                       const std::string& new_stack_symbols)
 
     : input_symbol_(input_symbol),
       stack_symbol_(stack_symbol),
       next_state_(next_state),
-      new_stack_symbols_(new_stack_symbols),
-      tape_(tape),
-      stack_(stack) {}
+      new_stack_symbols_(new_stack_symbols) {}
 
 Symbol Transition::inputSymbol() const {
   return input_symbol_;
@@ -26,23 +27,23 @@ Symbol Transition::stackSymbol() const {
   return stack_symbol_;
 }
 
-State* Transition::nextState() {
-  if (input_symbol_ != tape_.get().peek()) {
+State* Transition::nextState(Tape& current_tape, Stack& current_stack) const {
+  if (input_symbol_ != current_tape.peek()) {
     return nullptr;
   }
 
-  if (stack_symbol_ != stack_.get().top()) {
+  if (stack_symbol_ != current_stack.top()) {
     return nullptr;
   }
 
-  tape_.get().next();
+  current_tape.next();
 
   // TODO: Throw error
-  if (!stack_.get().empty()) {
-    stack_.get().pop();
+  if (!current_stack.empty()) {
+    current_stack.pop();
   }
 
-  stack_.get().pushSymbols(new_stack_symbols_);
+  current_stack.pushSymbols(new_stack_symbols_);
 
   return next_state_;
 }
@@ -50,9 +51,7 @@ State* Transition::nextState() {
 bool Transition::operator==(const Transition& other) const {
   return input_symbol_ == other.input_symbol_ && stack_symbol_ == other.stack_symbol_ &&
          new_stack_symbols_ == other.new_stack_symbols_ &&
-         next_state_ == other.next_state_ &&
-         std::addressof(tape_.get()) == std::addressof(other.tape_.get()) &&
-         std::addressof(stack_.get()) == std::addressof(other.stack_.get());
+         next_state_ == other.next_state_;
 }
 
 std::ostream& operator<<(std::ostream& os, const Transition& t) {
