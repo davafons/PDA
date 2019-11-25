@@ -17,8 +17,9 @@ int main(int argc, char* argv[]) {
   std::cout << pushdown_automata << std::endl;
 
   std::cout << "Running: " << argv[1] << "..." << std::endl;
-  std::cout << "Result: " << std::boolalpha << pushdown_automata.run(argv[2])
-            << std::endl;
+
+  bool result = pushdown_automata.run(argv[2]);
+  std::cout << "Result: " << std::boolalpha << result << std::endl;
 
   return 0;
 }

@@ -42,13 +42,13 @@ const Alphabet& Stack::alphabet() const {
 }
 
 std::ostream& operator<<(std::ostream& os, const Stack& st) {
-  os << "[ ";
+  os << "{ ";
 
   for (auto it = st.crbegin(); it != st.crend(); ++it) {
     os << *it << " ";
   }
 
-  os << "]";
+  os << "}";
 
   return os;
 }
