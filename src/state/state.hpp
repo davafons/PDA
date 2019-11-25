@@ -5,7 +5,7 @@
 #include <unordered_set>
 
 #include "state/transition.hpp"
-#include "state/utils.hpp"
+#include "utils/utils.hpp"
 
 namespace pda {
 

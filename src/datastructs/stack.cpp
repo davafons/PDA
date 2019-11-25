@@ -48,7 +48,7 @@ std::ostream& operator<<(std::ostream& os, const Stack& st) {
     os << *it << " ";
   }
 
-  os << "]\n";
+  os << "]";
 
   return os;
 }

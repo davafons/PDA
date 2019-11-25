@@ -1,10 +1,6 @@
 #include "alphabet.hpp"
 
-#include <iostream>  //  TODO: Remove
-
 namespace pda {
-
-Alphabet::Alphabet() {}
 
 bool Alphabet::empty() const {
   return regex_str_ == "\\" + Utils::lambda;

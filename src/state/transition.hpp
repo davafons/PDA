@@ -4,9 +4,9 @@
 #include <string>
 #include <vector>
 
-#include "stack.hpp"
-#include "tape.hpp"
-#include "utils.hpp"
+#include "datastructs/stack.hpp"
+#include "datastructs/tape.hpp"
+#include "utils/utils.hpp"
 namespace pda {
 
 class State;

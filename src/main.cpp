@@ -3,8 +3,7 @@
 #include <stack>
 #include <string>
 
-#include "state/alphabet.hpp"
-#include "state/pda.hpp"
+#include "pda/pda.hpp"
 
 int main() {
   pda::Pda pda;

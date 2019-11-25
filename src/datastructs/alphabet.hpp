@@ -4,13 +4,13 @@
 #include <string>
 #include <vector>
 
-#include "utils.hpp"
+#include "utils/utils.hpp"
 
 namespace pda {
 
 class Alphabet {
 public:
-  Alphabet();
+  Alphabet() = default;
 
   bool empty() const;
 

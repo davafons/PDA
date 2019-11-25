@@ -2,8 +2,8 @@
 
 #include <vector>
 
-#include "alphabet.hpp"
-#include "utils.hpp"
+#include "datastructs/alphabet.hpp"
+#include "utils/utils.hpp"
 
 namespace pda {
 

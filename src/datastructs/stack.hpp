@@ -1,9 +1,10 @@
 #pragma once
 
-#include <stack>
+#include <vector>
+#include <string>
 
-#include "alphabet.hpp"
-#include "utils.hpp"
+#include "datastructs/alphabet.hpp"
+#include "utils/utils.hpp"
 
 namespace pda {
 

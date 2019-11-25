@@ -10,4 +10,7 @@ target_include_directories(
   ${CMAKE_CURRENT_LIST_DIR}
 )
 
+add_subdirectory(datastructs)
+add_subdirectory(pda)
 add_subdirectory(state)
+add_subdirectory(utils)
