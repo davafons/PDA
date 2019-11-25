@@ -21,10 +21,10 @@ public:
   void setSymbols(const std::vector<Symbol>& symbols);
   void setSymbols(const std::string& symbols_str);
 
-  std::vector<Symbol> split(const std::string& input_str);
+  std::vector<Symbol> splitInSymbols(const std::string& symbols_str);
 
 private:
-  std::string regex_str_{"\\" + Constant::lambda};
+  std::string regex_str_{"\\" + Utils::lambda};
   std::regex regex_;
 };
 

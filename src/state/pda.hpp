@@ -27,7 +27,7 @@ public:
 
   void setStackStartSymbol(const Symbol& symbol);
 
-  void setFinalStates(const std::string& names);
+  void setFinalStates(const std::string& names_str);
 
   void setPdaType(Type type);
 
@@ -37,7 +37,7 @@ public:
   void addState(const std::string& s);
 
   void addStates(const std::vector<std::string>& names);
-  void addStates(const std::string& names);
+  void addStates(const std::string& names_str);
 
   void addTransition(const std::string& sf,
                      const Symbol& input_symbol,

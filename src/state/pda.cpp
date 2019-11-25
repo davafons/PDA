@@ -46,8 +46,8 @@ void Pda::setStackStartSymbol(const Symbol& symbol) {
   stack_.setStartSymbol(symbol);
 }
 
-void Pda::setFinalStates(const std::string& names) {
-  for (const auto& name : splitSymbols(names)) {
+void Pda::setFinalStates(const std::string& names_str) {
+  for (const auto& name : Utils::split(names_str)) {
     auto* s = state(name);
     if (s) {
       s->setFinal(true);
@@ -114,8 +114,8 @@ void Pda::addStates(const std::vector<std::string>& names) {
   }
 }
 
-void Pda::addStates(const std::string& names) {
-  addStates(splitSymbols(names));
+void Pda::addStates(const std::string& names_str) {
+  addStates(Utils::split(names_str));
 }
 
 void Pda::addTransition(const std::string& from_str,
@@ -168,7 +168,7 @@ bool Pda::run(State* current_state, Tape& current_tape, Stack& current_stack) {
     }
   }
 
-  if (explore_transitions(Constant::lambda, current_stack.top())) {
+  if (explore_transitions(Utils::lambda, current_stack.top())) {
     return true;
   }
 

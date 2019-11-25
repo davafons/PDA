@@ -7,12 +7,13 @@
 
 namespace pda {
 
-namespace Constant {
-const std::string lambda = ".";
-}
-
 using Symbol = std::string;
 
-std::vector<Symbol> splitSymbols(const std::string& symbols_str);
+class Utils {
+public:
+  static const std::string lambda;
+
+  static std::vector<std::string> split(const std::string& str);
+};
 
 }  // namespace pda

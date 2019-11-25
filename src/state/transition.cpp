@@ -41,7 +41,7 @@ std::string Transition::newStackSymbols() const {
 }
 
 State* Transition::nextState(Tape& current_tape, Stack& current_stack) const {
-  if (input_symbol_ != Constant::lambda && input_symbol_ != current_tape.peek()) {
+  if (input_symbol_ != Utils::lambda && input_symbol_ != current_tape.peek()) {
     return nullptr;
   }
 
@@ -49,7 +49,7 @@ State* Transition::nextState(Tape& current_tape, Stack& current_stack) const {
     return nullptr;
   }
 
-  if (input_symbol_ != Constant::lambda) {
+  if (input_symbol_ != Utils::lambda) {
     current_tape.next();
   }
 

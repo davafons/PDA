@@ -44,7 +44,7 @@ void Tape::reset() {
 }
 
 void Tape::setInputString(const std::string& input_str) {
-  tape_ = alphabet_.split(input_str);
+  tape_ = alphabet_.splitInSymbols(input_str);
 }
 
 std::ostream& operator<<(std::ostream& os, const Tape& t) {

@@ -2,10 +2,12 @@
 
 namespace pda {
 
-std::vector<Symbol> splitSymbols(const std::string& symbols_str) {
+const std::string Utils::lambda = ".";
+
+std::vector<std::string> Utils::split(const std::string& str) {
   std::vector<Symbol> result;
 
-  std::stringstream symbols_stream(symbols_str);
+  std::stringstream symbols_stream(str);
 
   Symbol symbol;
   while (symbols_stream >> symbol) {

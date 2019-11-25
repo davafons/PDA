@@ -24,10 +24,10 @@ void Stack::setStartSymbol(const Symbol& symbol) {
 }
 
 void Stack::pushSymbols(const std::string& symbols_str) {
-  auto symbols = alphabet_.split(symbols_str);
+  auto symbols = alphabet_.splitInSymbols(symbols_str);
 
   for (auto symbol_it = symbols.crbegin(); symbol_it != symbols.crend(); ++symbol_it) {
-    if (*symbol_it != Constant::lambda) {
+    if (*symbol_it != Utils::lambda) {
       std::vector<Symbol>::push_back(*symbol_it);
     }
   }

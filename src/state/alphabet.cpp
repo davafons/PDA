@@ -1,15 +1,17 @@
 #include "alphabet.hpp"
 
+#include <iostream>  //  TODO: Remove
+
 namespace pda {
 
 Alphabet::Alphabet() {}
 
 bool Alphabet::empty() const {
-  return regex_str_ == "\\" + Constant::lambda;
+  return regex_str_ == "\\" + Utils::lambda;
 }
 
 void Alphabet::reset() {
-  regex_str_ = "\\" + Constant::lambda;
+  regex_str_ = "\\" + Utils::lambda;
 }
 
 void Alphabet::addSymbol(Symbol symbol) {
@@ -25,11 +27,11 @@ void Alphabet::setSymbols(const std::vector<Symbol>& symbols) {
 }
 
 void Alphabet::setSymbols(const std::string& symbols_str) {
-  setSymbols(splitSymbols(symbols_str));
+  setSymbols(Utils::split(symbols_str));
 }
 
-std::vector<Symbol> Alphabet::split(const std::string& str) {
-  return {std::sregex_token_iterator(str.begin(), str.end(), regex_),
+std::vector<Symbol> Alphabet::splitInSymbols(const std::string& symbols_str) {
+  return {std::sregex_token_iterator(symbols_str.begin(), symbols_str.end(), regex_),
           std::sregex_token_iterator()};
 }
 
