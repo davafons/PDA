@@ -5,6 +5,9 @@ cmake_install.cmake
 Makefile
 compile_commands.json
 
+# Project
+pda
+
 # Testing
 googletest/
 Testing/
