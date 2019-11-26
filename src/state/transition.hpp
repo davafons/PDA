@@ -39,6 +39,9 @@ private:
 
 }  // namespace pda
 
+/*!
+ *  Hash function. Used to insert Transition elements on an "unordered_set"
+ */
 template <>
 struct std::hash<pda::Transition> {
   size_t operator()(const pda::Transition& obj) const {

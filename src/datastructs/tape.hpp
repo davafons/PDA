@@ -18,9 +18,8 @@ public:
   int size() const;
 
   Symbol peek() const;
-
   void next();
-  bool hasNext() const;
+  bool canRead() const;
 
   void reset();
 

@@ -17,9 +17,7 @@ public:
   void reset();
 
   void addSymbol(Symbol symbol);
-
-  void setSymbols(const std::vector<Symbol>& symbols);
-  void setSymbols(const std::string& symbols_str);
+  void addSymbols(const std::string& symbols_str);
 
   std::vector<Symbol> splitInSymbols(const std::string& symbols_str);
 

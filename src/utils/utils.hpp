@@ -11,7 +11,7 @@ using Symbol = std::string;
 
 class Utils {
 public:
-  static const std::string lambda;
+  static const Symbol lambda;
 
   static std::vector<std::string> split(const std::string& str);
 
