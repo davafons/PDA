@@ -12,6 +12,8 @@ target_include_directories(
   ${CMAKE_CURRENT_LIST_DIR}
 )
 
+target_link_libraries(pdalib coverage_config)
+
 # Generate executable
 add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} pdalib)
