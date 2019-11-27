@@ -24,8 +24,15 @@ namespace pda {
 /*!
  *  Check if the alphabet is empty.
  */
-bool Alphabet::empty() const {
-  return regex_str_ == "\\" + Utils::lambda;
+bool Alphabet::empty() const noexcept {
+  return size_ == 0;
+}
+
+/*!
+ *  Return the size of the alphabet.
+ */
+size_t Alphabet::size() const noexcept {
+  return size_;
 }
 
 /*!
@@ -33,6 +40,9 @@ bool Alphabet::empty() const {
  */
 void Alphabet::reset() {
   regex_str_ = "\\" + Utils::lambda;
+  regex_ = std::regex(regex_str_);
+
+  size_ = 0;
 }
 
 /*!
@@ -42,6 +52,8 @@ void Alphabet::addSymbol(Symbol symbol) {
   regex_str_ += "|" + symbol;
 
   regex_ = std::regex(regex_str_);
+
+  ++size_;
 }
 
 /*!

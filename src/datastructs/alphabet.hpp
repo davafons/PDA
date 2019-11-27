@@ -12,7 +12,8 @@ class Alphabet {
 public:
   Alphabet() = default;
 
-  bool empty() const;
+  bool empty() const noexcept;
+  size_t size() const noexcept;
 
   void reset();
 
@@ -26,6 +27,8 @@ public:
 private:
   std::string regex_str_{"\\" + Utils::lambda};
   std::regex regex_;
+
+  size_t size_{0};
 };
 
 }  // namespace pda

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <vector>
 #include <string>
+#include <vector>
 
 #include "datastructs/alphabet.hpp"
 #include "utils/utils.hpp"

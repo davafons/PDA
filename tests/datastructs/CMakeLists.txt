@@ -3,4 +3,5 @@ target_sources(
   PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}/test_alphabet.cpp
   ${CMAKE_CURRENT_LIST_DIR}/test_stack.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/test_tape.cpp
 )
