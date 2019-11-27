@@ -1,16 +1,17 @@
-target_sources(
-  ${PROJECT_NAME}
-  PRIVATE
-  ${CMAKE_CURRENT_LIST_DIR}/main.cpp
-)
+# Compile sources as library
+add_library(pdalib)
+
+add_subdirectory(datastructs)
+add_subdirectory(core)
+add_subdirectory(state)
+add_subdirectory(utils)
 
 target_include_directories(
-  ${PROJECT_NAME}
+  pdalib
   PUBLIC
   ${CMAKE_CURRENT_LIST_DIR}
 )
 
-add_subdirectory(datastructs)
-add_subdirectory(pda)
-add_subdirectory(state)
-add_subdirectory(utils)
+# Generate executable
+add_executable(${PROJECT_NAME} main.cpp)
+target_link_libraries(${PROJECT_NAME} pdalib)

@@ -3,8 +3,8 @@
 #include <stack>
 #include <string>
 
-#include "pda/pda.hpp"
-#include "pda/pdabuilder.hpp"
+#include "core/pda.hpp"
+#include "core/pdabuilder.hpp"
 
 int main(int argc, char* argv[]) {
   if (argc < 3) {

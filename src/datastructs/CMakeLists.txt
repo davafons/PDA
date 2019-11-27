@@ -1,5 +1,5 @@
 target_sources(
-  ${PROJECT_NAME}
+  pdalib
   PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}/alphabet.cpp
   ${CMAKE_CURRENT_LIST_DIR}/stack.cpp
