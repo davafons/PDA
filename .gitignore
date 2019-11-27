@@ -8,6 +8,7 @@ compile_commands.json
 *.gcov
 *.gcov_tmp
 build/
+boost-cmake/
 
 # Project
 pda

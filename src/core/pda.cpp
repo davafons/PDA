@@ -175,6 +175,22 @@ void Pda::setPdaType(Type type) {
 }
 
 /*!
+ *  Return if the PDA is in Debug mode (printing each execution step).
+ */
+bool Pda::debugMode() const noexcept {
+  return debug_mode_;
+}
+
+/*!
+ *  Toggle debug mode for the PDA.
+ *
+ *  \sa debugMode()
+ */
+void Pda::setDebugMode(bool toggled) {
+  debug_mode_ = toggled;
+}
+
+/*!
  *  Execute the Pda for a new input string.
  */
 bool Pda::run(const std::string& input_str) {
@@ -200,7 +216,9 @@ bool Pda::run(State* current_state, Tape& current_tape, Stack& current_stack) {
     std::cout << "---------------------------" << std::endl;
   };
 
-  print_pda();
+  if (debugMode()) {
+    print_pda();
+  }
 
   // Helper function to explore the transitions from the provided stack, and for the
   // provided symbols.
@@ -208,9 +226,13 @@ bool Pda::run(State* current_state, Tape& current_tape, Stack& current_stack) {
   auto explore_transitions =
       [this, &print_pda, &current_state, &current_tape, &current_stack](
           const Symbol& input_symbol, const Symbol& stack_symbol) {
+        // Iterate over each transition from the current state with this symbols
         for (const auto& transition :
              current_state->transitions(input_symbol, stack_symbol)) {
-          std::cout << "> Transition: " << transition << std::endl;
+
+          if (debugMode()) {
+            std::cout << "> Transition: " << transition << std::endl;
+          }
 
           // For each transition, clone the tape and stack and call this method
           // recursively.
@@ -218,14 +240,19 @@ bool Pda::run(State* current_state, Tape& current_tape, Stack& current_stack) {
           Stack new_stack(current_stack);
           State* new_state = transition.nextState(new_tape, new_stack);
 
+          // Check if exploring this transition the PDA recognizes the string.
           bool result = run(new_state, new_tape, new_stack);
 
+          // If the string is recognized, return true to stop execution.
           if (result) {
             return true;
           }
 
-          std::cout << ">> Can't continue. Going back to previous state." << std::endl;
-          print_pda();
+          if (debugMode()) {
+            std::cout << ">> Can't continue. Going back to previous state."
+                      << std::endl;
+            print_pda();
+          }
         }
 
         return false;

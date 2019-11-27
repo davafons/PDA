@@ -46,6 +46,10 @@ public:
 
   // Pda
   void setPdaType(Type type);
+
+  bool debugMode() const noexcept;
+  void setDebugMode(bool toggled);
+
   bool run(const std::string& input);
 
   friend std::ostream& operator<<(std::ostream& os, const Pda& pda);
@@ -62,6 +66,8 @@ private:
   std::map<std::string, State*> states_;
 
   State* start_state_{nullptr};
+
+  bool debug_mode_{false};
 };
 
 }  // namespace pda
