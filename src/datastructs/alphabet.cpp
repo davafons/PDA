@@ -1,5 +1,7 @@
 #include "alphabet.hpp"
 
+#include <iostream>  // TODO: Delete
+
 namespace pda {
 
 /*!
@@ -57,8 +59,32 @@ void Alphabet::addSymbols(const std::string& symbols_str) {
  *  Note: Unrecognized elements are skipped.
  */
 std::vector<Symbol> Alphabet::splitInSymbols(const std::string& symbols_str) {
-  return {std::sregex_token_iterator(symbols_str.begin(), symbols_str.end(), regex_),
-          std::sregex_token_iterator()};
+  std::vector<Symbol> matches;
+
+  // Prints a warning message if a symbol was skipped due to not being on the Alphabet.
+  auto check_sticky = [](int init_pos, int end_pos, const std::string& symbols_str) {
+    if (init_pos != end_pos) {
+      std::cout << "WARGNING! Unrecognized symbol: "
+                << symbols_str.substr(init_pos, end_pos - init_pos) << std::endl;
+    }
+  };
+
+  int current_pos = 0;
+  for (auto it = std::sregex_iterator(symbols_str.begin(), symbols_str.end(), regex_);
+       it != std::sregex_iterator();
+       ++it) {
+
+    // Push the current match to the symbols vector
+    matches.push_back(it->str());
+
+    // Check if we skipped some symbol between matches
+    check_sticky(current_pos, it->position(), symbols_str);
+    current_pos = it->position() + it->length();
+  }
+
+  check_sticky(current_pos, symbols_str.length(), symbols_str);
+
+  return matches;
 }
 
 /*!
