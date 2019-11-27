@@ -13,6 +13,8 @@ class State;
 
 class Transition {
 public:
+  Transition() = default;
+
   Transition(const Symbol& input_symbol,
              const Symbol& stack_symbol,
              State* next_state,

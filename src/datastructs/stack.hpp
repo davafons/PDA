@@ -13,6 +13,9 @@ public:
   using std::vector<Symbol>::vector;
 
   bool empty() const noexcept;
+  size_t size() const noexcept;
+
+  void clear();
 
   Symbol& top();
   const Symbol& top() const;

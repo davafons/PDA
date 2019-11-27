@@ -17,6 +17,20 @@ bool Stack::empty() const noexcept {
 }
 
 /*!
+ *  Return the size of the stack.
+ */
+size_t Stack::size() const noexcept {
+  return std::vector<Symbol>::size();
+}
+
+/*!
+ *  Remove all elements from the stack.
+ */
+void Stack::clear() {
+  std::vector<Symbol>::clear();
+}
+
+/*!
  *  Return the character at the top of the stack.
  */
 Symbol& Stack::top() {

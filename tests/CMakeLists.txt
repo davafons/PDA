@@ -7,4 +7,4 @@ add_subdirectory(utils)
 
 target_link_libraries(pda_tests gtest_main pdalib)
 
-add_test(TARGET pda_tests)
+add_test(TARGET ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/pda_tests)
