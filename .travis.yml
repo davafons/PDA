@@ -8,7 +8,7 @@ script:
   - cd build
   - cmake -DCOVERALLS=ON -DCMAKE_BUILD_TYPE=Debug ..
   - cmake --build .
-  - ctest
+  - make test
 
 addons:
   apt:

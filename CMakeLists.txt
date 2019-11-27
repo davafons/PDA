@@ -44,6 +44,7 @@ if(CODE_COVERAGE)
     -g         # generate debug info
     -fprofile-arcs
     -ftest-coverage
+    --coverage
   )
 
   if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.13)
