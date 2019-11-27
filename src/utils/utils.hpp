@@ -18,6 +18,8 @@ public:
   static std::string& trim(std::string& str);
   static std::string& ltrim(std::string& str);
   static std::string& rtrim(std::string& str);
+
+  static std::string nextLine(std::ifstream& file_stream);
 };
 
 }  // namespace pda

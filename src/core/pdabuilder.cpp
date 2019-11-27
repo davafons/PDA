@@ -18,26 +18,19 @@ namespace pda {
  */
 Pda PdaBuilder::fromFile(const std::string& file_path) {
   std::ifstream file_stream(file_path);
-
-  // Read next line until its not empty or is not a comment. Then return it.
-  auto next_line = [](std::ifstream& file_stream) {
-    std::string line;
-    do {
-      std::getline(file_stream, line);
-    } while (line.empty() || Utils::trim(line)[0] == '#');
-
-    return line;
-  };
+  if (!file_stream.is_open()) {
+    throw std::runtime_error("Can't read automata file: " + file_path);
+  }
 
   Pda pda;
 
-  pda.addStates(next_line(file_stream));
+  pda.addStates(Utils::nextLine(file_stream));
 
-  pda.tapeAlphabet().addSymbols(next_line(file_stream));
-  pda.stackAlphabet().addSymbols(next_line(file_stream));
+  pda.tapeAlphabet().addSymbols(Utils::nextLine(file_stream));
+  pda.stackAlphabet().addSymbols(Utils::nextLine(file_stream));
 
-  pda.setStartState(next_line(file_stream));
-  pda.setStackStartSymbol(next_line(file_stream));
+  pda.setStartState(Utils::nextLine(file_stream));
+  pda.setStackStartSymbol(Utils::nextLine(file_stream));
 
   // At this point, there's a line that is hard to parse:
   // On a "Final state PDA" file, this line says which are the final states.
@@ -46,7 +39,7 @@ Pda PdaBuilder::fromFile(const std::string& file_path) {
 
   // So, we check if the symbols read on this line are states or not in order to guess
   // the type of the PDA.
-  std::string conflictive_line = next_line(file_stream);
+  std::string conflictive_line = Utils::nextLine(file_stream);
   std::stringstream line_stream(conflictive_line);
   std::string token;
   bool is_states_line = true;
