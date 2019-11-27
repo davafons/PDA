@@ -1,6 +1,5 @@
 #include "datastructs/alphabet.hpp"
 #include "gtest/gtest.h"
-#include "state/transition.hpp"
 
 namespace pda {
 
@@ -51,7 +50,6 @@ TEST_F(AlphabetTest, addSymbols) {
   ASSERT_EQ(symbols.size(), 2);
   ASSERT_EQ(symbols[0], "X");
   ASSERT_EQ(symbols[1], "Y");
-
 }
 
 }  // namespace pda
