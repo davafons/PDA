@@ -8,6 +8,7 @@
 $ git clone --recurse-submodules -j8 https://github.com/davafons/PDA
 $ cd PDA
 $ mkdir build
+$ cd build
 $ cmake build ..
 $ make
 ```
