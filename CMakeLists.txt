@@ -3,7 +3,9 @@ cmake_minimum_required(VERSION 3.5.0)
 project(pda)
 
 # CMake config
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if(CMAKE_VERSION VERSION_LESS "3.7.0")
@@ -20,7 +22,7 @@ add_subdirectory(src)
 
 
 # Testing
-include(cmake/googletest.cmake)
+include(googletest)
 fetch_googletest(
   ${PROJECT_SOURCE_DIR}/cmake
   ${PROJECT_BINARY_DIR}/googletest
