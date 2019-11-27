@@ -93,9 +93,9 @@ State* Transition::nextState(Tape& current_tape, Stack& current_stack) const {
  *  the same "next_state_" objet.
  */
 bool Transition::operator==(const Transition& other) const {
-  return input_symbol_ == other.input_symbol_ && stack_symbol_ == other.stack_symbol_ &&
-         new_stack_symbols_ == other.new_stack_symbols_ &&
-         &next_state_ == &other.next_state_;
+  return inputSymbol() == other.inputSymbol() && stackSymbol() == other.stackSymbol() &&
+         nextStateName() == other.nextStateName() &&
+         newStackSymbols() == other.newStackSymbols();
 }
 
 /*!

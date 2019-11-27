@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "state/state.hpp"
+#include "state/transition.hpp"
 
 namespace pda {
 
@@ -33,6 +34,30 @@ TEST_F(StateTest, isFinal) {
   s1_->setFinal(true);
 
   ASSERT_TRUE(s1_->isFinal());
+}
+
+TEST_F(StateTest, getTransitions) {
+  auto transitions = s1_->transitions("a", "A");
+
+  ASSERT_TRUE(transitions.empty());
+}
+
+TEST_F(StateTest, addTransition) {
+  s1_->addTransition(Transition("a", "A", s2_, "AZ"));
+  s1_->addTransition(Transition("a", "A", s1_, "A"));
+
+  auto transitions = s1_->transitions("a", "A");
+  ASSERT_EQ(transitions.size(), 2);
+}
+
+TEST_F(StateTest, addDuplicatedTransition) {
+  s1_->addTransition(Transition("a", "A", s2_, "AZ"));
+  s1_->addTransition(Transition("a", "A", s2_, "AZ"));
+
+  auto transitions = s1_->transitions("a", "A");
+
+  // The transition won't be repeated twice
+  ASSERT_EQ(transitions.size(), 1);
 }
 
 }  // namespace pda
