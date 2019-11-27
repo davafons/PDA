@@ -44,10 +44,13 @@ private:
 /*!
  *  Hash function. Used to insert Transition elements on an "unordered_set"
  */
+namespace std {
 template <>
-struct std::hash<pda::Transition> {
+struct hash<pda::Transition> {
   size_t operator()(const pda::Transition& obj) const {
-    return std::hash<std::string>()(obj.inputSymbol() + obj.stackSymbol() +
-                                    obj.nextStateName() + obj.newStackSymbols());
+    return hash<std::string>()(obj.inputSymbol() + obj.stackSymbol() +
+                               obj.nextStateName() + obj.newStackSymbols());
   }
 };
+
+}  // namespace std
