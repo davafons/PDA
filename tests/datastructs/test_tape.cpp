@@ -1,5 +1,8 @@
+#include <sstream>
+
 #include "datastructs/tape.hpp"
 #include "gtest/gtest.h"
+#include "utils/utils.hpp"
 
 namespace pda {
 
@@ -58,6 +61,13 @@ TEST_F(TapeTest, InputString) {
   tape_.setInputString("ABCDE");
 
   ASSERT_EQ(tape_.size(), 3);
+}
+
+TEST_F(TapeTest, Output) {
+  std::stringstream os;
+  os << tape_;
+
+  ASSERT_EQ(os.str(), "[ A ]\n  ^");
 }
 
 }  // namespace pda

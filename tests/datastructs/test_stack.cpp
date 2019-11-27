@@ -33,6 +33,11 @@ TEST_F(StackTest, Top) {
   ASSERT_EQ(stack_.top(), "A");
 }
 
+TEST_F(StackTest, TopConst) {
+  const Stack& st = stack_;
+  const Symbol& symbol = st.top();
+}
+
 TEST_F(StackTest, Pop) {
   stack_.pop();
 
@@ -67,6 +72,13 @@ TEST_F(StackTest, pushLambda) {
 
   stack_.pushSymbols(Utils::lambda);
   ASSERT_TRUE(stack_.empty());
+}
+
+TEST_F(StackTest, Output) {
+  std::stringstream os;
+  os << stack_;
+
+  ASSERT_EQ(os.str(), "{ A }");
 }
 
 }  // namespace pda
