@@ -37,11 +37,12 @@ int main(int argc, char* argv[]) {
     if (input_file.is_open()) {
 
       // Run the automata for each line.
-      std::string line;
-      do {
+      std::string line = pda::Utils::nextLine(input_file);
+
+      while (!line.empty()) {
         runAutomata(pda, line);
         line = pda::Utils::nextLine(input_file);
-      } while (!line.empty());
+      }
 
     } else {  // Run the input as a string if couldn't be opened as a file
       runAutomata(pda, options.input);

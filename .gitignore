@@ -8,6 +8,7 @@ compile_commands.json
 *.gcov
 *.gcov_tmp
 build/
+_deps/
 
 # Project
 pda
