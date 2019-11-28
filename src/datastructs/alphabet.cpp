@@ -8,8 +8,7 @@ namespace pda {
  *  \class Alphabet
  *  \brief Set of symbols used for splitting strings.
  *
- *  Use this class to split a string by its recogizable symbols. Each symbol will be
- *  recognizable, even if it doesn't has spaces in between.
+ *  Use this class to split a string by its recogizable symbols.
  *
  *  For example, for the following alphabet:
  *        A BC D
@@ -17,6 +16,8 @@ namespace pda {
  *      [ A BC D A ]
  *
  *  (Note how unrecognized symbols like F are skipped)
+ *  (Also, note how even if the string doesn't has spaces, the symbol BD is recognized
+ *  as a whole)
  *
  *  By default, all alphabets include the Lambda symbol.
  */

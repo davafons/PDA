@@ -6,7 +6,8 @@ namespace pda {
 
 /*!
  *  \class State
- *  \brief Class representing a State with transitions.
+ *  \brief Class representing a PDA State with transitions.
+ *
  */
 
 /*!
@@ -50,7 +51,7 @@ std::unordered_set<Transition>& State::transitions(const Symbol& input_symbol,
 }
 
 /*!
- *  Add a new transition from the state.
+ *  Add a new transition to the State.
  *  Note: All transitions are guaranteed to be unique. Can't add two equal transitions.
  */
 void State::addTransition(const Transition& transition) {

@@ -59,7 +59,7 @@ int main(int argc, char* argv[]) {
 void runAutomata(pda::Pda& pda, const std::string& input) {
   std::cout << "Input: " << input << std::endl;
   bool recognized = pda.run(input);
-  std::cout << "Recognized: " << std::boolalpha << recognized << std::endl;
+  std::cout << "Recognized: " << std::boolalpha << recognized << std::endl << std::endl;
 }
 
 bool parseArguments(int argc, char* argv[], Options& options) {
